@@ -14,6 +14,21 @@
 		if (urlParams.has('token')) {
 			veriftyToken(urlParams.get('token'));
 		}
+		
+		function veriftyToken(tokenValue){
+			$.get('http://localhost:8080/mobile-app-ws/users/email-verification', {token: tokenValue})
+			.done(function (response){
+				
+				if(response["opernationResult"]==="SUCCESS"){
+					$("#successful-result").attr("style", "display: block !important;");
+					$("#not-successful-result").attr("style", "display: none !important;");
+				} else {
+					$("#successful-result").attr("style", "display: none !important;");
+					$("#not-successful-result").attr("style", "display: block !important;");
+				}
+			});
+		}
+		
 	});
 </script>
 
